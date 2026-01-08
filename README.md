@@ -54,6 +54,7 @@ The project focuses on low-cost hardware, rapid prototyping, and reliable remote
 ## Repository Structure
 
 RADAR-Telepresence-Robot/
+
 ├── src/ # ROS 2 packages
 
 ├── launch/ # Launch files
