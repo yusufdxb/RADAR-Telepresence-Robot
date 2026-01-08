@@ -55,9 +55,13 @@ The project focuses on low-cost hardware, rapid prototyping, and reliable remote
 
 RADAR-Telepresence-Robot/
 ├── src/ # ROS 2 packages
+
 ├── launch/ # Launch files
+
 ├── config/ # Configuration files
+
 ├── assets/ # Images and videos
+
 └── README.md
 
 ---
