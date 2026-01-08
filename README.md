@@ -53,3 +53,9 @@ The project focuses on low-cost hardware, rapid prototyping, and reliable remote
 
 ## Repository Structure
 
+---
+## Project Status
+
+This project is currently under active development as part of a graduate-level robotics course.
+Core teleoperation and video streaming features are functional.
+Additional work is ongoing to improve robustness, user interface, and sensor integration.
