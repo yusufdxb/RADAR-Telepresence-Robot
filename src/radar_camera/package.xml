@@ -1,1 +1,14 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>radar_camera</name>
+  <version>0.1.0</version>
+  <description>Camera streaming node for RADAR (OpenCV → ROS 2 Image topic)</description>
+
+  <maintainer email="group4@example.com">Group4</maintainer>
+  <license>MIT</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+</package>
 
