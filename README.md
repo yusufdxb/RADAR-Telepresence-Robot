@@ -116,32 +116,6 @@ Vital sign sensing
 Launch files will be provided in the launch/ directory once integration is complete.
 
 
-5. Click **Commit changes**
-
-That’s it.
-
----
-
-## Why this step matters
-Even without code, this tells:
-- Professors: *you understand workflow*
-- Recruiters: *you know ROS structure*
-- Teammates: *how to start*
-
-This is **portfolio-level documentation**.
-
----
-
-## What comes AFTER this (you choose)
-
-Reply with **one** of these and we continue:
-
-1. **“Add system architecture diagram”** (block diagram, nodes, topics)
-2. **“Add software architecture section”** (nodes, topics, data flow)
-3. **“Upload ROS code”**
-4. **“Polish README for portfolio”**
-
-You’re doing fine. We’re building this correctly, not fast and sloppy.
 
 
 
