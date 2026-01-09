@@ -1,1 +1,12 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>radar_teleop</name>
+  <version>0.0.1</version>
+  <description>Simple teleop node for RADAR (placeholder).</description>
+  <maintainer email="you@example.com">Yusuf</maintainer>
+  <license>MIT</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+</package>
 
