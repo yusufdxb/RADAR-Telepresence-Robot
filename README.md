@@ -74,6 +74,24 @@ Additional work is ongoing to improve robustness, user interface, and sensor int
 
 ---
 
+## System Architecture (High Level)
+
+RADAR is organized as modular ROS 2 nodes:
+
+- **Teleoperation Node**: reads joystick input and publishes velocity commands
+- **Base Controller**: drives the mobile robot using `/cmd_vel`
+- **Camera Stream Node**: publishes video frames from the onboard camera
+- **Pan–Tilt Node**: controls the camera mount servos
+- **Vitals Node (MAX30102)**: reads pulse/SpO₂ data and publishes vitals
+
+### Key Topics (Typical)
+
+- `/cmd_vel` — robot velocity commands  
+- `/camera/image_raw` — camera frames  
+- `/vitals` — pulse + SpO₂ readings  
+- `/pan_tilt_cmd` — servo commands (if used)
+
+
 ---
 
 ## Installation
