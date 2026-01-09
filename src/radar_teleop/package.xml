@@ -3,7 +3,7 @@
   <name>radar_teleop</name>
   <version>0.0.1</version>
   <description>Simple teleop node for RADAR (placeholder).</description>
-  <maintainer email="you@example.com">Yusuf</maintainer>
+  <maintainer email="Group4@example.com">Group4</maintainer>
   <license>MIT</license>
 
   <exec_depend>rclpy</exec_depend>
