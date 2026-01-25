@@ -74,10 +74,15 @@ This architecture allows individual subsystems to be modified or replaced withou
 
 ## 📂 Repository Structure
 RADAR-Telepresence-Robot/
+
 ├── src/ # ROS 2 packages
+
 ├── launch/ # Launch files
+
 ├── config/ # Configuration files
+
 ├── assets/ # Images and videos
+
 └── README.md
 
 ---
