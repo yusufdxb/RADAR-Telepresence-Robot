@@ -109,5 +109,34 @@ cd ..
 colcon build
 source install/setup.bash
 
+---
 
+## ▶️ Usage
+
+The RADAR system is composed of multiple ROS 2 nodes that together enable remote operation and monitoring of the robot. These nodes handle mobile base teleoperation, live camera streaming, pan–tilt camera control, and physiological vital sign sensing.
+
+System components are designed to run concurrently and communicate through standard ROS 2 topics. Launch files located in the `launch/` directory are used to coordinate the startup of all required nodes for full system operation.
+
+---
+
+## 📊 Project Status
+
+The RADAR system is functionally complete. Core capabilities including joystick-based teleoperation, live video streaming, pan–tilt camera control, and onboard vital sign sensing have been implemented and validated.
+
+---
+
+## 🔮 Future Extensions
+
+Possible future extensions of RADAR include the integration of autonomous navigation and obstacle avoidance, expansion of the graphical user interface, incorporation of additional sensing modalities for redundancy, and support for remote networking over wide-area connections.
+
+These extensions can be added without restructuring the existing system due to the modular ROS 2 architecture.
+
+---
+
+## 📫 Contact
+
+For questions, collaboration, or system extensions, please reach out through GitHub.
+
+
+The project serves as a stable baseline platform for experimentation, system integration, and future research extensions.
 
