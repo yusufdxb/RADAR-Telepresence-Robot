@@ -1,0 +1,43 @@
+launch:
+  - node:
+      package: radar_teleop
+      executable: teleop_node
+      name: teleop_node
+      output: screen
+      parameters:
+        - use_sim_time: false
+
+  - node:
+      package: radar_base
+      executable: base_controller
+      name: base_controller
+      output: screen
+
+  - node:
+      package: radar_camera
+      executable: camera_node
+      name: camera_node
+      output: screen
+      parameters:
+        - camera_index: 0
+        - frame_rate: 30
+
+  - node:
+      package: radar_pan_tilt
+      executable: pan_tilt_node
+      name: pan_tilt_node
+      output: screen
+      parameters:
+        - pan_min: -1.57
+        - pan_max: 1.57
+        - tilt_min: -0.78
+        - tilt_max: 0.78
+
+  - node:
+      package: radar_vitals
+      executable: vitals_node
+      name: vitals_node
+      output: screen
+      parameters:
+        - i2c_bus: 1
+        - sample_rate: 100
