@@ -1,139 +1,76 @@
-# RADAR – Remote Autonomous Doctor Assistance Robot
+# RADAR — Remote Autonomous Doctor Assistance Robot
 
-RADAR (Remote Autonomous Doctor Assistance Robot) is a ROS 2–based telepresence robotic system designed to enable remote medical interaction and monitoring in environments where physical presence is limited.
+RADAR (Remote Autonomous Doctor Assistance Robot) is a **ROS 2–based medical telepresence robotic system** designed to enable remote clinician interaction, real-time robot control, live video streaming, and patient vital sign monitoring in environments where physical presence is limited.
 
-The system allows a remote clinician to manually control a mobile robot, view live video, and monitor patient vital signs in real time.
-
----
-
-## Project Overview
-
-RADAR is built on a mobile robotic platform and integrates:
-- Real-time video streaming
-- Remote joystick-based teleoperation
-- Pan-tilt camera control
-- Vital sign monitoring using onboard sensors
-- A modular ROS 2 software architecture
-
-The project focuses on low-cost hardware, rapid prototyping, and reliable remote operation.
+The system was developed as a **complete, functional robotic platform** emphasizing modularity, low-cost hardware, and reliable remote operation.
 
 ---
 
-## System Features
+## 🚑 Motivation & Problem Statement
 
-- ROS 2–based architecture
-- Live camera feed with pan-tilt control
-- Remote joystick teleoperation
-- Onboard pulse oximeter for vital signs
-- Modular software nodes for easy expansion
-- Designed for research and educational use
+Access to medical personnel can be limited in remote, hazardous, or high-risk environments. RADAR addresses this challenge by providing a mobile telepresence robot that allows clinicians to:
 
----
+- Remotely navigate a physical environment  
+- Observe patients through live video  
+- Monitor basic physiological data in real time  
 
-## Hardware Components
-
-- Mobile robot base (TurtleBot-class platform)
-- Raspberry Pi
-- USB camera
-- Pan-tilt servo module
-- MAX30102 pulse oximeter
-- Joystick controller
+The platform is designed for **research, prototyping, and educational use**, with a strong emphasis on extensibility.
 
 ---
 
-## Software Stack
+## ✨ System Capabilities
 
-- Ubuntu Linux
-- ROS 2
-- Python and C++
-- OpenCV
-- Qt (for GUI development)
-
----
-
-## Repository Structure
-
-RADAR-Telepresence-Robot/
-
-├── src/ # ROS 2 packages
-
-├── launch/ # Launch files
-
-├── config/ # Configuration files
-
-├── assets/ # Images and videos
-
-└── README.md
-
----
-## Project Status
-
-This project is currently under active development as part of a graduate-level robotics course.
-Core teleoperation and video streaming features are functional.
-Additional work is ongoing to improve robustness, user interface, and sensor integration.
+- Real-time joystick-based teleoperation  
+- Live camera streaming with pan–tilt control  
+- Onboard vital sign monitoring (pulse & SpO₂)  
+- Modular ROS 2 node-based architecture  
+- Designed for rapid prototyping and extension  
 
 ---
 
-## System Architecture (High Level)
+## 🧱 System Architecture
 
-RADAR is organized as modular ROS 2 nodes:
+RADAR is implemented as a set of **loosely coupled ROS 2 nodes**, enabling clean separation of perception, control, and sensing:
 
-- **Teleoperation Node**: reads joystick input and publishes velocity commands
-- **Base Controller**: drives the mobile robot using `/cmd_vel`
-- **Camera Stream Node**: publishes video frames from the onboard camera
-- **Pan–Tilt Node**: controls the camera mount servos
-- **Vitals Node (MAX30102)**: reads pulse/SpO₂ data and publishes vitals
+- **Teleoperation Node**  
+  Reads joystick input and publishes velocity commands  
 
-### Key Topics (Typical)
+- **Base Controller Node**  
+  Drives the mobile robot via `/cmd_vel`  
 
-- `/cmd_vel` — robot velocity commands  
-- `/camera/image_raw` — camera frames  
-- `/vitals` — pulse + SpO₂ readings  
-- `/pan_tilt_cmd` — servo commands (if used)
+- **Camera Stream Node**  
+  Publishes live video frames from the onboard camera  
 
+- **Pan–Tilt Node**  
+  Controls servo-driven camera orientation  
+
+- **Vitals Node (MAX30102)**  
+  Reads and publishes pulse and SpO₂ data  
+
+This architecture allows individual subsystems to be modified or replaced without affecting the overall system.
 
 ---
 
-## Installation
+## 🔌 Hardware Components
 
-This project is developed using ROS 2 on Ubuntu Linux.
+- Mobile robot base (TurtleBot-class platform)  
+- Raspberry Pi  
+- USB camera  
+- Pan–tilt servo module  
+- MAX30102 pulse oximeter  
+- Joystick controller  
 
-### Prerequisites
-- Ubuntu 22.04 (recommended)
-- ROS 2 (Humble)
-- Python 3
-- colcon
+---
 
-### Setup
-```bash
-# Create a workspace
-mkdir -p ~/radar_ws/src
-cd ~/radar_ws/src
+## 💻 Software Stack
 
-# Clone the repository
-git clone https://github.com/yusufdxb/RADAR-Telepresence-Robot.git
+- Ubuntu Linux  
+- ROS 2 (Humble)  
+- Python and C++  
+- OpenCV  
+- Qt (GUI development)  
 
-# Build the workspace
-cd ..
-colcon build
-source install/setup.bash
+---
 
-
-Usage
-
-The RADAR system is composed of multiple ROS 2 nodes for:
-
-Mobile base teleoperation
-
-Camera streaming
-
-Pan-tilt camera control
-
-Vital sign sensing
-
-Launch files will be provided in the launch/ directory once integration is complete.
-
-
-
-
+## 📂 Repository Structure
 
