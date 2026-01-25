@@ -73,4 +73,36 @@ This architecture allows individual subsystems to be modified or replaced withou
 ---
 
 ## 📂 Repository Structure
+RADAR-Telepresence-Robot/
+├── src/ # ROS 2 packages
+├── launch/ # Launch files
+├── config/ # Configuration files
+├── assets/ # Images and videos
+└── README.md
+
+---
+
+## ⚙️ Installation & Build
+
+### Prerequisites
+- Ubuntu 22.04  
+- ROS 2 Humble  
+- Python 3  
+- colcon  
+
+### Setup
+```bash
+# Create workspace
+mkdir -p ~/radar_ws/src
+cd ~/radar_ws/src
+
+# Clone repository
+git clone https://github.com/yusufdxb/RADAR-Telepresence-Robot.git
+
+# Build workspace
+cd ..
+colcon build
+source install/setup.bash
+
+
 
