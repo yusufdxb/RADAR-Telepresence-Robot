@@ -4,6 +4,10 @@ RADAR (Remote Autonomous Doctor Assistance Robot) is a **ROS 2–based medical t
 
 The system was developed as a **complete, functional robotic platform** emphasizing modularity, low-cost hardware, and reliable remote operation.
 
+<p align="center">
+  <img src="assets/RADAR.png" width="700"/>
+</p>
+
 ---
 
 ## 🚑 Motivation & Problem Statement
