@@ -63,6 +63,7 @@ This architecture allows individual subsystems to be modified or replaced withou
 - Pan–tilt servo module  
 - MAX30102 pulse oximeter  
 - Joystick controller  
+- Custom 3D printed camera pan-tilt mechanism
 
 ---
 
