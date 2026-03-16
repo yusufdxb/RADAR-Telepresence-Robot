@@ -1,0 +1,22 @@
+# Python dependencies for RADAR Telepresence Robot
+# ROS 2 Jazzy required (install separately via apt)
+
+# Core
+rclpy
+std_msgs
+sensor_msgs
+geometry_msgs
+
+# Vitals sensing (MAX30102)
+smbus2
+max30102
+
+# GUI
+PyQt6
+
+# Networking / telepresence
+opencv-python
+numpy
+
+# Serial communication
+pyserial
