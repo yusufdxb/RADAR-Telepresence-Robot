@@ -78,17 +78,19 @@ This architecture allows individual subsystems to be modified or replaced withou
 ---
 
 ## 📂 Repository Structure
+
+```
 RADAR-Telepresence-Robot/
-
-├── src/ # ROS 2 packages
-
-├── launch/ # Launch files
-
-├── config/ # Configuration files
-
-├── assets/ # Images and videos
-
+├── src/              # ROS 2 packages
+├── launch/           # Launch files
+├── config/           # Configuration files
+├── gui/              # Qt-based operator interface
+├── assets/           # Images and videos
+├── docs/             # Documentation
+├── requirements.txt  # Python dependencies
+├── SETUP.md          # Detailed setup guide
 └── README.md
+```
 
 ---
 
@@ -122,6 +124,17 @@ source install/setup.bash
 The RADAR system is composed of multiple ROS 2 nodes that together enable remote operation and monitoring of the robot. These nodes handle mobile base teleoperation, live camera streaming, pan–tilt camera control, and physiological vital sign sensing.
 
 System components are designed to run concurrently and communicate through standard ROS 2 topics. Launch files located in the `launch/` directory are used to coordinate the startup of all required nodes for full system operation.
+
+---
+
+## 🖥️ GUI — Operator Interface
+
+The RADAR system includes a Qt-based graphical user interface for remote operation. The GUI provides clinicians with a unified control panel for teleoperation, live video feed, pan-tilt camera adjustment, and real-time vital sign display.
+
+<!-- Add GUI demo screenshot below -->
+<!-- ![RADAR GUI Demo](assets/gui_demo.png) -->
+
+> **Demo:** *(paste your GUI screenshot here)*
 
 ---
 
