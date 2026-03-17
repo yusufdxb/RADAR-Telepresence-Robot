@@ -1,0 +1,26 @@
+# Build
+build/
+install/
+log/
+*.pyc
+__pycache__/
+
+# ROS 2
+*.bag
+*.db3
+
+# Qt
+*.o
+*.a
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
