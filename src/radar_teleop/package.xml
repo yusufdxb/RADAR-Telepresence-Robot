@@ -2,11 +2,18 @@
 <package format="3">
   <name>radar_teleop</name>
   <version>0.0.1</version>
-  <description>Simple teleop node for RADAR (placeholder).</description>
-  <maintainer email="Group4@example.com">Group4</maintainer>
+  <description>Joystick teleoperation node for RADAR — /joy to /cmd_vel with deadzone and turbo support.</description>
+  <maintainer email="yusuf.a.guenena@gmail.com">Yusuf Guenena</maintainer>
   <license>MIT</license>
 
   <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
 </package>
 
