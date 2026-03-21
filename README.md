@@ -163,6 +163,17 @@ ros2 launch launch/radar_bringup.launch.py
 
 ---
 
+## ROS 2 Topics
+
+| Topic | Type | Direction | Description |
+|-------|------|-----------|-------------|
+| `/cmd_vel` | `geometry_msgs/Twist` | GUI → base | Teleoperation velocity |
+| `/joy` | `sensor_msgs/Joy` | joystick → teleop node | Raw joystick input |
+| `/camera/image_raw` | `sensor_msgs/Image` | camera node → GUI | Live video feed |
+| `/pan_tilt/cmd` | `std_msgs/Float32MultiArray` | GUI → pan-tilt node | Servo angle commands |
+| `/vitals/pulse` | `std_msgs/Float32` | vitals node → GUI | Heart rate (BPM) |
+| `/vitals/spo2` | `std_msgs/Float32` | vitals node → GUI | Blood oxygen (%) |
+
 ## Usage
 
 Each subsystem has its own ROS 2 node and can be launched individually or together via the launch files in `launch/`.
