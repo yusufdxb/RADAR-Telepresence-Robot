@@ -21,9 +21,9 @@
 
 ## What is RADAR?
 
-**RADAR** is a fully operational ROS 2 medical telepresence robot built for environments where physical access to healthcare is constrained — remote sites, quarantine zones, or high-risk clinical settings. A clinician can control the robot from anywhere: navigate the environment, orient a live camera feed, and monitor a patient's pulse and blood oxygen in real time, all through a single Qt-based interface.
+**RADAR** is a ROS 2 medical telepresence robot designed for environments where physical access to healthcare is constrained — remote sites, quarantine zones, or high-risk clinical settings. The goal: a clinician controls the robot remotely, orients a live camera, and monitors a patient's pulse and blood oxygen in real time through a single Qt-based interface.
 
-The system is built around a **modular, node-based ROS 2 architecture**, meaning every subsystem — motion, vision, sensing, and UI — can be independently upgraded or replaced without touching the rest of the stack.
+The hardware prototype validated teleoperation, camera streaming, servo-driven pan-tilt, and MAX30102 vital sign monitoring. The system is built around a **modular, node-based ROS 2 architecture** so each subsystem can be upgraded or replaced independently.
 
 ---
 
@@ -194,16 +194,21 @@ All nodes communicate over standard ROS 2 topics and can be monitored with `ros2
 
 ## Project Status
 
-**Core system: complete and validated.**
+Hardware access has ended. The prototype was built and tested; the codebase reflects the full intended design.
 
-- [x] Joystick teleoperation
-- [x] Live video streaming
-- [x] Pan–tilt camera control
-- [x] Vital sign monitoring (MAX30102)
-- [x] Qt operator GUI
-- [ ] Autonomous navigation (Nav2 integration)
-- [ ] Wide-area network support
-- [ ] Expanded sensor suite
+**Validated on hardware:**
+- [x] Joystick teleoperation (joystick → `/cmd_vel` → mobile base)
+- [x] Live video streaming (USB camera → ROS 2 image topic)
+- [x] Pan–tilt servo control (joystick axes → GPIO-driven servos via gpiozero)
+- [x] Vital sign monitoring (MAX30102 I2C driver — HR and SpO₂ peak detection)
+
+**Implemented, not hardware-tested:**
+- [x] Qt 6 operator GUI (rclcpp spin thread, live video panel, vitals display, pan-tilt sliders)
+
+**Not implemented:**
+- [ ] Two-way audio
+- [ ] Autonomous navigation (Nav2)
+- [ ] Wide-area network streaming (WebRTC / RTSP)
 
 ---
 
