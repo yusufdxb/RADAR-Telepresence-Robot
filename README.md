@@ -35,21 +35,21 @@ The strongest public signal in this repo is not novelty marketing. It is integra
 
 That distinction is intentional. The repo should not claim more validation than it has.
 
-## System Architecture
+## Public Architecture
 
-```text
-operator input / GUI
-        |
-        +--> radar_teleop --> /cmd_vel ------------------------------> mobile base
-        |
-        +--> radar_pan_tilt --> servo commands ----------------------> camera pan/tilt
-        |
-        +<-- radar_camera <--- /camera/image_raw <------------------- USB camera
-        |
-        +<-- radar_vitals <--- /radar/pulseox/raw / vitals <--------- MAX30102 sensor
-```
+![RADAR system architecture](docs/system_architecture.svg)
 
-More detail: [HARDWARE.md](HARDWARE.md) and [TESTING.md](TESTING.md)
+More detail: [HARDWARE.md](HARDWARE.md), [TESTING.md](TESTING.md), [VALIDATION.md](VALIDATION.md)
+
+## Existing Hardware Assets
+
+<p align="center">
+  <img src="assets/Joystick.png" width="32%" />
+  <img src="assets/Pulse Ox.png" width="32%" />
+  <img src="assets/3D_Camera Mount.jpg" width="32%" />
+</p>
+
+These images are now paired with a concrete demo and validation plan instead of being left as disconnected media.
 
 ## Repository Layout
 
@@ -116,11 +116,16 @@ These commands match the public package layout more closely than the older top-l
 | `/radar/pulseox/vitals` | processed heart rate and SpO2 estimates |
 | `/pan_tilt/cmd` | servo command topic |
 
+## Demo And Validation Scaffolding
+
+- [DEMO.md](DEMO.md) defines a recruiter-friendly 90-second demo sequence.
+- [VALIDATION.md](VALIDATION.md) defines the specific latency and reference-device checks still worth publishing.
+
 ## Why This Repo Is Stronger Than Average
 
 - It combines UI, sensing, teleop, and hardware I/O instead of stopping at a single ROS 2 node.
 - The vitals path includes actual device-level code instead of a placeholder sensor wrapper.
-- The public repo now distinguishes between implemented scope and validated scope, which makes it more credible under employer review.
+- The public repo distinguishes between implemented scope and validated scope, which makes it more credible under employer review.
 
 ## Current Gaps
 

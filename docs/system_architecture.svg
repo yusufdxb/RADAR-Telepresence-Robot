@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <style>
+      .title { font: 700 30px Arial, sans-serif; fill: #17314f; }
+      .label { font: 600 18px Arial, sans-serif; fill: #17314f; }
+      .small { font: 500 14px Arial, sans-serif; fill: #35516f; }
+      .box { rx: 18; ry: 18; stroke-width: 3; }
+      .operator { fill: #eef7ff; stroke: #628cb4; }
+      .robot { fill: #edf8f0; stroke: #5c996f; }
+      .sensor { fill: #fff4e5; stroke: #b28a43; }
+      .flow { stroke: #35516f; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 z" fill="#35516f"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="720" fill="#fcfdff"/>
+  <text x="60" y="60" class="title">RADAR Telepresence Robot: Public System Architecture</text>
+  <text x="60" y="95" class="small">Hardware-tested subsystems are separated from software-only integration claims.</text>
+
+  <rect x="70" y="170" width="250" height="120" class="box operator"/>
+  <text x="110" y="215" class="label">Remote Operator</text>
+  <text x="110" y="243" class="small">joystick + Qt GUI</text>
+  <text x="110" y="265" class="small">views video and vitals</text>
+
+  <rect x="420" y="140" width="260" height="90" class="box robot"/>
+  <text x="455" y="180" class="label">radar_teleop</text>
+  <text x="455" y="208" class="small">publishes /cmd_vel</text>
+
+  <rect x="420" y="260" width="260" height="90" class="box robot"/>
+  <text x="455" y="300" class="label">radar_camera</text>
+  <text x="455" y="328" class="small">publishes /camera/image_raw</text>
+
+  <rect x="420" y="380" width="260" height="90" class="box robot"/>
+  <text x="455" y="420" class="label">radar_pan_tilt</text>
+  <text x="455" y="448" class="small">servo control for camera aim</text>
+
+  <rect x="420" y="500" width="260" height="90" class="box robot"/>
+  <text x="455" y="540" class="label">radar_vitals</text>
+  <text x="455" y="568" class="small">MAX30102 readout + derived vitals</text>
+
+  <rect x="820" y="140" width="220" height="90" class="box sensor"/>
+  <text x="870" y="180" class="label">Mobile Base</text>
+  <text x="860" y="208" class="small">velocity command execution</text>
+
+  <rect x="820" y="260" width="220" height="90" class="box sensor"/>
+  <text x="865" y="300" class="label">USB Camera</text>
+  <text x="850" y="328" class="small">live video source</text>
+
+  <rect x="820" y="380" width="220" height="90" class="box sensor"/>
+  <text x="855" y="420" class="label">Pan-Tilt Servos</text>
+  <text x="855" y="448" class="small">camera orientation</text>
+
+  <rect x="820" y="500" width="220" height="90" class="box sensor"/>
+  <text x="855" y="540" class="label">MAX30102 Sensor</text>
+  <text x="845" y="568" class="small">pulse and SpO2 data</text>
+
+  <path d="M320 215 L420 185" class="flow"/>
+  <path d="M320 230 L420 300" class="flow"/>
+  <path d="M320 245 L420 420" class="flow"/>
+  <path d="M320 260 L420 540" class="flow"/>
+
+  <path d="M680 185 L820 185" class="flow"/>
+  <path d="M820 300 L680 300" class="flow"/>
+  <path d="M680 420 L820 420" class="flow"/>
+  <path d="M820 540 L680 540" class="flow"/>
+
+  <rect x="70" y="620" width="1130" height="60" fill="#eef3f7" stroke="#c9d5e0" rx="16" ry="16"/>
+  <text x="100" y="658" class="small">Validation targets: teleop command latency, camera stream update rate, vitals refresh rate, and reference-device comparison for pulse / SpO2.</text>
+</svg>
