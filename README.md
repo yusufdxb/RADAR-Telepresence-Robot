@@ -2,233 +2,138 @@
   <img src="assets/RADAR.png" width="750"/>
 </p>
 
-<h1 align="center">RADAR — Remote Autonomous Doctor Assistance Robot</h1>
+# RADAR Telepresence Robot
 
-<p align="center">
-  <em>Bringing clinical presence anywhere, in real time.</em>
-</p>
+> ROS 2 telepresence prototype for remote clinical interaction.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/ROS_2-Jazzy-blue?logo=ros&logoColor=white" />
-  <img src="https://img.shields.io/badge/Platform-Raspberry_Pi-red?logo=raspberrypi&logoColor=white" />
-  <img src="https://img.shields.io/badge/Language-Python_%7C_C%2B%2B-informational?logo=cplusplus" />
-  <img src="https://img.shields.io/badge/GUI-Qt_6-green?logo=qt&logoColor=white" />
-  <img src="https://img.shields.io/badge/Vision-OpenCV-blue?logo=opencv&logoColor=white" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow" />
-</p>
+**Platform:** Raspberry Pi + mobile base + USB camera + pan-tilt servos + MAX30102  
+**Status:** prototype completed; hardware access ended  
+**Public repo status:** hardware-tested subsystems are documented separately from implemented-but-not-hardware-validated software
 
----
+## What This Project Is
 
-## What is RADAR?
+RADAR is a modular ROS 2 telepresence robot intended for constrained-care environments where a remote operator needs mobility, live video, camera orientation control, and patient vitals in one system.
 
-**RADAR** is a ROS 2 medical telepresence robot designed for environments where physical access to healthcare is constrained — remote sites, quarantine zones, or high-risk clinical settings. The goal: a clinician controls the robot remotely, orients a live camera, and monitors a patient's pulse and blood oxygen in real time through a single Qt-based interface.
+The strongest public signal in this repo is not novelty marketing. It is integration:
+- teleoperation over ROS 2 topics
+- live camera streaming
+- servo-driven pan-tilt control
+- MAX30102 pulse and SpO2 sensing
+- a dedicated Qt operator interface
 
-The hardware prototype validated teleoperation, camera streaming, servo-driven pan-tilt, and MAX30102 vital sign monitoring. The system is built around a **modular, node-based ROS 2 architecture** so each subsystem can be upgraded or replaced independently.
+## What Was Actually Validated
 
----
+### Hardware-tested on the prototype
+- joystick teleoperation to robot velocity commands
+- USB camera image publishing
+- pan-tilt servo actuation through ROS 2 nodes
+- pulse oximeter data acquisition and derived vitals publishing
 
-## Features
+### Implemented in the repo, but not hardware-revalidated after access ended
+- Qt operator GUI in `gui/main.cpp`
+- full integrated bringup from the public software stack
 
-| Capability | Details |
-|---|---|
-| **Joystick Teleoperation** | Real-time velocity commands via `/cmd_vel` |
-| **Live Video Streaming** | USB camera feed published as ROS 2 image topics |
-| **Pan–Tilt Camera Control** | Servo-driven 2-axis camera orientation |
-| **Vital Sign Monitoring** | Pulse rate & SpO₂ via MAX30102 sensor |
-| **Operator GUI** | Unified Qt 6 control panel for all subsystems |
-| **Modular Architecture** | Loosely coupled ROS 2 nodes — swap any component independently |
-
----
+That distinction is intentional. The repo should not claim more validation than it has.
 
 ## System Architecture
 
-```
-┌──────────────────────────────────────────────────────┐
-│                    OPERATOR GUI (Qt 6)                │
-│        Teleoperation │ Video Feed │ Vitals Display    │
-└────────────┬─────────┴─────┬──────┴──────────────────┘
-             │               │
-    ┌────────▼────────┐  ┌───▼──────────────────────┐
-    │ Teleop Node     │  │   Camera Stream Node      │
-    │ /joy → /cmd_vel │  │   USB Cam → Image Topic   │
-    └────────┬────────┘  └───────────────────────────┘
-             │
-    ┌────────▼────────┐  ┌───────────────────────────┐
-    │ Base Controller │  │   Pan–Tilt Node           │
-    │ Mobile Platform │  │   Servo 2-Axis Control    │
-    └─────────────────┘  └───────────────────────────┘
-                         ┌───────────────────────────┐
-                         │   Vitals Node (MAX30102)  │
-                         │   Pulse + SpO₂ → Topic    │
-                         └───────────────────────────┘
+```text
+operator input / GUI
+        |
+        +--> radar_teleop --> /cmd_vel ------------------------------> mobile base
+        |
+        +--> radar_pan_tilt --> servo commands ----------------------> camera pan/tilt
+        |
+        +<-- radar_camera <--- /camera/image_raw <------------------- USB camera
+        |
+        +<-- radar_vitals <--- /radar/pulseox/raw / vitals <--------- MAX30102 sensor
 ```
 
-All nodes communicate over standard ROS 2 topics — no tight coupling, no monolithic code.
+More detail: [HARDWARE.md](HARDWARE.md) and [TESTING.md](TESTING.md)
 
----
+## Repository Layout
 
-## Hardware
-
-| Component | Role |
+| Path | Purpose |
 |---|---|
-| TurtleBot-class Mobile Base | Ground locomotion platform |
-| Raspberry Pi | Onboard compute |
-| USB Camera | Live video capture |
-| Pan–Tilt Servo Module | Camera orientation control |
-| MAX30102 Sensor | Pulse oximetry (SpO₂ + heart rate) |
-| Joystick Controller | Operator teleoperation input |
-| Custom 3D-Printed Mount | Pan-tilt camera bracket |
+| `src/radar_teleop` | joystick and teleop node |
+| `src/radar_camera` | camera publisher |
+| `src/radar_pan_tilt` | pan-tilt control nodes |
+| `src/radar_vitals` | pulse oximeter acquisition and vitals publishing |
+| `src/radar_bringup` | launch package |
+| `gui/` | Qt 6 operator interface |
+| `config/` | subsystem configuration |
+| `assets/` | hardware images and project media |
 
----
+## ROS 2 Packages
 
-## Software Stack
-
-| Layer | Technology |
+| Package | Role |
 |---|---|
-| OS | Ubuntu 24.04 |
-| Robotics Framework | ROS 2 Jazzy |
-| Languages | Python 3, C++ |
-| Vision | OpenCV |
-| GUI | Qt 6 / PyQt6 |
-| Sensing | smbus2, max30102 |
-| Serial | pyserial |
+| `radar_teleop` | converts operator input into motion commands |
+| `radar_camera` | publishes live video from the onboard camera |
+| `radar_pan_tilt` | handles servo orientation control |
+| `radar_vitals` | reads MAX30102 and publishes raw/vitals topics |
+| `radar_bringup` | launches the software stack |
 
----
-
-## GUI — Operator Interface
-
-The RADAR operator GUI is built with **Qt 6** and gives clinicians a single unified interface to control the robot and monitor the patient — without touching a terminal.
-
-**Panels include:**
-- Live video feed with pan–tilt controls
-- Joystick teleoperation overlay
-- Real-time vitals (heart rate & SpO₂)
-- System status indicators
-
-<!-- Replace this comment with your screenshot -->
-<!-- ![RADAR GUI](assets/gui_demo.png) -->
-
-> **Demo screenshot** — *(paste your GUI image here)*
-
----
-
-## Repository Structure
-
-```
-RADAR-Telepresence-Robot/
-├── src/              # ROS 2 packages (nodes)
-├── launch/           # Launch files
-├── config/           # Parameter and config files
-├── gui/              # Qt 6 operator interface (C++)
-├── assets/           # Images and demo media
-├── docs/             # Documentation
-├── requirements.txt  # Python dependencies
-├── SETUP.md          # Detailed setup guide
-└── README.md
-```
-
----
-
-## Installation
-
-> For the full setup guide including ROS 2 installation and hardware configuration, see [SETUP.md](SETUP.md).
-
-### Prerequisites
-
-- Ubuntu 24.04
-- ROS 2 Jazzy
-- Python 3.10+
-- colcon build tools
-
-### Quick Start
+## Build
 
 ```bash
-# 1. Create workspace
-mkdir -p ~/radar_ws/src && cd ~/radar_ws/src
-
-# 2. Clone the repository
+mkdir -p ~/radar_ws/src
+cd ~/radar_ws/src
 git clone https://github.com/yusufdxb/RADAR-Telepresence-Robot.git
-
-# 3. Install Python dependencies
-pip install -r RADAR-Telepresence-Robot/requirements.txt
-
-# 4. Build
 cd ~/radar_ws
-colcon build
-
-# 5. Source and launch
+source /opt/ros/jazzy/setup.bash
+pip install -r src/RADAR-Telepresence-Robot/requirements.txt
+colcon build --symlink-install
 source install/setup.bash
-ros2 launch launch/radar_bringup.launch.py
 ```
 
----
+## Run
 
-## ROS 2 Topics
-
-| Topic | Type | Direction | Description |
-|-------|------|-----------|-------------|
-| `/cmd_vel` | `geometry_msgs/Twist` | GUI → base | Teleoperation velocity |
-| `/joy` | `sensor_msgs/Joy` | joystick → teleop node | Raw joystick input |
-| `/camera/image_raw` | `sensor_msgs/Image` | camera node → GUI | Live video feed |
-| `/pan_tilt/cmd` | `std_msgs/Float32MultiArray` | GUI → pan-tilt node | Servo angle commands |
-| `/vitals/pulse` | `std_msgs/Float32` | vitals node → GUI | Heart rate (BPM) |
-| `/vitals/spo2` | `std_msgs/Float32` | vitals node → GUI | Blood oxygen (%) |
-
-## Usage
-
-Each subsystem has its own ROS 2 node and can be launched individually or together via the launch files in `launch/`.
+The active launch file in this repository is:
 
 ```bash
-# Launch full system
-ros2 launch launch/radar_bringup.launch.py
-
-# Or launch individual nodes
-ros2 run radar_teleop teleop_node
-ros2 run radar_camera camera_stream_node
-ros2 run radar_vitals vitals_node
+ros2 launch radar_bringup radar_system.launch.py
 ```
 
-All nodes communicate over standard ROS 2 topics and can be monitored with `ros2 topic list` and `rqt`.
+Representative individual nodes:
 
----
+```bash
+ros2 run radar_teleop teleop_node
+ros2 run radar_camera camera_node
+ros2 run radar_pan_tilt pan_tilt_node
+ros2 run radar_vitals pulse_ox_node
+```
 
-## Project Status
+These commands match the public package layout more closely than the older top-level launch examples.
 
-Hardware access has ended. The prototype was built and tested; the codebase reflects the full intended design.
+## Topics
 
-**Validated on hardware:**
-- [x] Joystick teleoperation (joystick → `/cmd_vel` → mobile base)
-- [x] Live video streaming (USB camera → ROS 2 image topic)
-- [x] Pan–tilt servo control (joystick axes → GPIO-driven servos via gpiozero)
-- [x] Vital sign monitoring (MAX30102 I2C driver — HR and SpO₂ peak detection)
+| Topic | Purpose |
+|---|---|
+| `/cmd_vel` | mobile base velocity command |
+| `/camera/image_raw` | live video stream |
+| `/radar/pulseox/raw` | raw sensor values |
+| `/radar/pulseox/vitals` | processed heart rate and SpO2 estimates |
+| `/pan_tilt/cmd` | servo command topic |
 
-**Implemented, not hardware-tested:**
-- [x] Qt 6 operator GUI (rclcpp spin thread, live video panel, vitals display, pan-tilt sliders)
+## Why This Repo Is Stronger Than Average
 
-**Not implemented:**
-- [ ] Two-way audio
-- [ ] Autonomous navigation (Nav2)
-- [ ] Wide-area network streaming (WebRTC / RTSP)
+- It combines UI, sensing, teleop, and hardware I/O instead of stopping at a single ROS 2 node.
+- The vitals path includes actual device-level code instead of a placeholder sensor wrapper.
+- The public repo now distinguishes between implemented scope and validated scope, which makes it more credible under employer review.
 
----
+## Current Gaps
 
-## Future Work
-
-The modular ROS 2 architecture makes RADAR straightforward to extend:
-
-- **Autonomous navigation** — drop in a Nav2 stack without touching existing nodes
-- **Expanded sensing** — thermal camera, additional vitals sensors
-- **Wide-area networking** — VPN or WebRTC for operation beyond the local network
-- **AI-assisted triage** — integrate a vision model for automated patient assessment
-
----
+The highest-value additions still missing are:
+- one end-to-end demo video
+- GUI screenshots or screen recording
+- quantitative latency notes for video, teleop, and vitals refresh
+- comparison of vitals output against a reference device
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
----
+MIT License. See [LICENSE](LICENSE).
 
 ## Contact
 
-Built by [@yusufdxb](https://github.com/yusufdxb) — open to collaboration, questions, and extensions via GitHub Issues.
+Built by [@yusufdxb](https://github.com/yusufdxb)
