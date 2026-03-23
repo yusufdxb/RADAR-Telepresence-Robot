@@ -8,20 +8,20 @@
 
 **Platform:** Raspberry Pi + mobile base + USB camera + pan-tilt servos + MAX30102  
 **Status:** prototype completed; hardware access ended  
-**Public repo status:** hardware-tested subsystems are documented separately from implemented-but-not-hardware-validated software
+**Validation status:** hardware-tested subsystems are listed below; integrated bringup and GUI remain software-only in the public repo
 
-## What This Project Is
+## Overview
 
 RADAR is a modular ROS 2 telepresence robot intended for constrained-care environments where a remote operator needs mobility, live video, camera orientation control, and patient vitals in one system.
 
-The strongest public signal in this repo is not novelty marketing. It is integration:
+Integrated subsystems:
 - teleoperation over ROS 2 topics
 - live camera streaming
 - servo-driven pan-tilt control
 - MAX30102 pulse and SpO2 sensing
 - a dedicated Qt operator interface
 
-## What Was Actually Validated
+## Validation Scope
 
 ### Hardware-tested on the prototype
 - joystick teleoperation to robot velocity commands
@@ -33,15 +33,13 @@ The strongest public signal in this repo is not novelty marketing. It is integra
 - Qt operator GUI in `gui/main.cpp`
 - full integrated bringup from the public software stack
 
-That distinction is intentional. The repo should not claim more validation than it has.
-
 ## Public Architecture
 
 ![RADAR system architecture](docs/system_architecture.svg)
 
 More detail: [HARDWARE.md](HARDWARE.md), [TESTING.md](TESTING.md), [VALIDATION.md](VALIDATION.md)
 
-## Existing Hardware Assets
+## Hardware Assets
 
 <p align="center">
   <img src="assets/Joystick.png" width="32%" />
