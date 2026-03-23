@@ -49,8 +49,6 @@ More detail: [HARDWARE.md](HARDWARE.md), [TESTING.md](TESTING.md), [VALIDATION.m
   <img src="assets/3D_Camera Mount.jpg" width="32%" />
 </p>
 
-These images are now paired with a concrete demo and validation plan instead of being left as disconnected media.
-
 ## Repository Layout
 
 | Path | Purpose |
@@ -116,24 +114,10 @@ These commands match the public package layout more closely than the older top-l
 | `/radar/pulseox/vitals` | processed heart rate and SpO2 estimates |
 | `/pan_tilt/cmd` | servo command topic |
 
-## Demo And Validation Scaffolding
+## Supporting Docs
 
-- [DEMO.md](DEMO.md) defines a recruiter-friendly 90-second demo sequence.
-- [VALIDATION.md](VALIDATION.md) defines the specific latency and reference-device checks still worth publishing.
-
-## Why This Repo Is Stronger Than Average
-
-- It combines UI, sensing, teleop, and hardware I/O instead of stopping at a single ROS 2 node.
-- The vitals path includes actual device-level code instead of a placeholder sensor wrapper.
-- The public repo distinguishes between implemented scope and validated scope, which makes it more credible under employer review.
-
-## Current Gaps
-
-The highest-value additions still missing are:
-- one end-to-end demo video
-- GUI screenshots or screen recording
-- quantitative latency notes for video, teleop, and vitals refresh
-- comparison of vitals output against a reference device
+- [DEMO.md](DEMO.md)
+- [VALIDATION.md](VALIDATION.md)
 
 ## License
 
