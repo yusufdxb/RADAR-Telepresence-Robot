@@ -105,10 +105,9 @@ The RADAR operator GUI is built with **Qt 6** and gives clinicians a single unif
 - Real-time vitals (heart rate & SpO₂)
 - System status indicators
 
-<!-- Add gui_demo.png to assets/ to enable this image -->
-<!-- ![RADAR GUI](assets/gui_demo.png) -->
+![RADAR GUI](assets/gui_demo.png)
 
-> **GUI screenshot:** Add `assets/gui_demo.png` to display the Qt 6 operator interface here.
+_GUI mockup showing camera feed, vitals monitor, pan/tilt controls, and joystick interface._
 
 ---
 
