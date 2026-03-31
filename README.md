@@ -27,6 +27,13 @@ The hardware prototype validated teleoperation, camera streaming, servo-driven p
 
 ---
 
+<p align="center">
+  <img src="assets/gui_demo.png" width="720"/>
+</p>
+<p align="center"><em>Operator interface: live video, vitals monitoring, pan–tilt controls</em></p>
+
+---
+
 ## Features
 
 | Capability | Details |
@@ -157,7 +164,7 @@ colcon build
 
 # 5. Source and launch
 source install/setup.bash
-ros2 launch launch/radar_bringup.launch.py
+ros2 launch launch/radar_system.launch.yaml
 ```
 
 ---
@@ -179,11 +186,11 @@ Each subsystem has its own ROS 2 node and can be launched individually or togeth
 
 ```bash
 # Launch full system
-ros2 launch launch/radar_bringup.launch.py
+ros2 launch launch/radar_system.launch.yaml
 
 # Or launch individual nodes
 ros2 run radar_teleop teleop_node
-ros2 run radar_camera camera_stream_node
+ros2 run radar_camera camera_node
 ros2 run radar_vitals vitals_node
 ```
 
