@@ -49,25 +49,20 @@ The hardware prototype validated teleoperation, camera streaming, servo-driven p
 
 ## System Architecture
 
-```
-┌──────────────────────────────────────────────────────┐
-│                    OPERATOR GUI (Qt 6)                │
-│        Teleoperation │ Video Feed │ Vitals Display    │
-└────────────┬─────────┴─────┬──────┴──────────────────┘
-             │               │
-    ┌────────▼────────┐  ┌───▼──────────────────────┐
-    │ Teleop Node     │  │   Camera Stream Node      │
-    │ /joy → /cmd_vel │  │   USB Cam → Image Topic   │
-    └────────┬────────┘  └───────────────────────────┘
-             │
-    ┌────────▼────────┐  ┌───────────────────────────┐
-    │ Base Controller │  │   Pan–Tilt Node           │
-    │ Mobile Platform │  │   Servo 2-Axis Control    │
-    └─────────────────┘  └───────────────────────────┘
-                         ┌───────────────────────────┐
-                         │   Vitals Node (MAX30102)  │
-                         │   Pulse + SpO₂ → Topic    │
-                         └───────────────────────────┘
+```mermaid
+graph TD
+    GUI["OPERATOR GUI (Qt 6): Teleoperation, Video Feed, Vitals Display"]
+    Teleop["Teleop Node, /joy to /cmd_vel"]
+    Camera["Camera Stream Node, USB Cam to Image Topic"]
+    Base["Base Controller, Mobile Platform"]
+    PanTilt["Pan-Tilt Node, Servo 2-Axis Control"]
+    Vitals["Vitals Node (MAX30102), Pulse + SpO2 to Topic"]
+
+    GUI --> Teleop
+    GUI --> Camera
+    GUI --> PanTilt
+    Teleop --> Base
+    Vitals --> GUI
 ```
 
 All nodes communicate over standard ROS 2 topics — no tight coupling, no monolithic code.
